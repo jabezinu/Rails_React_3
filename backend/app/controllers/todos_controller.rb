@@ -1,5 +1,5 @@
 class TodosController < ApplicationController
-  before_action :set_todo, only: %i[ show update destroy ]
+  before_action :set_todo, only: %i[ show update_completed destroy ]
 
   # GET /todos
   def index
@@ -18,15 +18,15 @@ class TodosController < ApplicationController
     @todo = Todo.new(todo_params)
 
     if @todo.save
-      render json: @todo, status: :created, location: @todo
+      render json: @todo, status: :created
     else
       render json: @todo.errors, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /todos/1
-  def update
-    if @todo.update(todo_params)
+  def update_completed
+    if @todo.update(completed: params[:completed])
       render json: @todo
     else
       render json: @todo.errors, status: :unprocessable_entity
