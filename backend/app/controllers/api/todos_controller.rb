@@ -1,4 +1,4 @@
-class TodosController < ApplicationController
+class Api::TodosController < ApplicationController
   before_action :set_todo, only: %i[ show update_completed destroy ]
 
   # GET /todos
